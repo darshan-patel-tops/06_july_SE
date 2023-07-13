@@ -1,0 +1,8 @@
+1)  git clone 'Your URL'
+    EX:- git clone https://github.com/darshan-patel-tops/06_july_SE
+	1.1) git pull
+
+
+2) git add .
+3) git commit -m "First Commit"
+4) git push
