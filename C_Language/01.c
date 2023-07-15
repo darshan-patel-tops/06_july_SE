@@ -15,7 +15,7 @@ main()
 	printf("your statement");
 	
 	*/
-	printf("hello this is  hamza and he is %d",395-25);
+	printf("hello this is  hamza and he is %d",395+25);
 	
 
 }
