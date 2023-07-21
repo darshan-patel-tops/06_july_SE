@@ -5,7 +5,9 @@ int main()
 	
 	printf("Enter 2 numbers \n");
 	scanf("%d %d",&a,&b);
+	
 	char choice;
+	
 	printf("enter you choice\n");
 	scanf(" %c",&choice);
 	
