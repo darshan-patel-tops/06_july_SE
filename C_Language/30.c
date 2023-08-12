@@ -14,6 +14,7 @@ int sub()
 main()
 {
 	sub();
+	add();
 }
 
 int add()

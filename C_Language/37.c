@@ -23,8 +23,8 @@ main()
 	printf("%d\n",strcmp(n3,n1));
 
 
-	char welcome[]="Hello";
-	char name1[]=" divyaveer";
+	char welcome[]="Hello ";
+	char name1[]="  divyaveer";
 	printf("%s %s\n",welcome,name1);
 	printf("%s",strcat(welcome,name1));
 
