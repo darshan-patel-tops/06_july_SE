@@ -15,8 +15,8 @@ class calc
 //			cin>>this->b;
 			this->a = z;
 			this->b = y;
-			cout<<"Total is "<<z+y<<endl;
-			cout<<"Total is "<<this->a+this->b<<endl;
+			cout<<"Total is without this "<<z+y<<endl;
+			cout<<"Total is with this "<<this->a+this->b<<endl;
 			
 			
 		}	
