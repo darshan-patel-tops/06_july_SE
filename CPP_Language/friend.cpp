@@ -22,19 +22,32 @@ class check
 		{
 			this->daggabaaz();
 		}
+		friend void ultimatedagabaaz();
 };
 
-class check2 : public check
+void ultimatedagabaaz()
 {
 	
-};
+	check c;
+	cout<<c.a<<endl;
+	cout<<c.b<<endl;
+	cout<<c.c<<endl;
+}
+
+
+
+
 main()
 {
 //	check c;
-	check2 c;
-	cout<<c.a<<endl;	
+//	check2 c;
+//	cout<<c.a<<endl;	
 //	cout<<c.b<<endl;	
 //	cout<<c.c<<endl;
 //	c.daggabaaz();	
-	c.seconddagabbaz();	
+//	c.seconddagabbaz();	
+
+//	cout<<ultimatedagabaaz<<endl;
+ultimatedagabaaz();
+	
 }
