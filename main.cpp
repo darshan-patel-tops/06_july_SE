@@ -1,177 +1,597 @@
-#include <iostream>
-#include <vector>
-#include <ctime>
-#include <fstream>
-#include <sstream> 
-
+#include "onlineBanking.h"
 using namespace std;
+vector<vector<string>, string> content;
+vector<string> row;
+string username;
 
-// Define a structure to represent a user account
-struct UserAccount {
-    string username;
-    string password;
-    string firstName;
-    string lastName;
-    string address;
-    string mobile;
-    string gender;
-    int age;
+//Current Time and Date ====> Time Stamp <t_Stamp> ---------
+time_t now = time(0);
+char* t_Stamp = ctime(&now);
+
+class landingPage {
+    public:
+        void currentPage(){
+            int r=21, c=61, i, j, choice;
+
+            system("cls");
+            cout<<endl<<endl;
+            for(i=0; i<r; i++)
+            {
+                for(j=0; j<c; j++)
+                {   
+                    if(i<r && j==0)
+                        cout<<"\t\t\t";
+
+                    if(i==0 && j==1){
+                        cout<<"Author: Divyaveer ";
+                        j+=9;
+                    }
+
+                    if(i==1 && j==27){
+                        cout<<"State Bank Of India ";
+                        j+=10;
+                    }
+
+                    if(i==4 && j==24){
+                        cout<<"Online Banking Customer Service ";
+                        j+=16;
+                    }
+
+                    if(i==7 && j==30){
+                        cout<<"Welcome ";
+                        j+=4;
+                    }
+
+                    if(i==0 && j==55){
+                        cout<<"HOME PAGE ";
+                        j+=5;
+                    }
+
+                    if(i==10 && j==3){
+                        cout<<"Press:----";
+                        j+=5;
+                    }
+
+                    if(i==11 && j==5){
+                        cout<<"1. Register ";
+                        j+=6;
+                    }
+
+                    if(i==12 && j==5){
+                        cout<<"2. Login";
+                        j+=4;
+                    }
+
+                    if(i==13 && j==5){
+                        cout<<"3. Forgot Password";
+                        j+=9;
+                    }
+
+                    if(i==14 && j==5){
+                        cout<<"4. Exit ";
+                        j+=4;
+                    }
+
+                    if(i==r-1 && j==48){
+                        cout<<t_Stamp;
+                        j=c;
+                    }
+
+                    if(i==r-1 && j==1){
+                        cout<<"Coach : Darshan Sir (TOPS Tech, Ahmedabad) ";
+                        j+=21;
+                    }
+
+                    if(i==2 && j<c){
+                        cout<<"* ";
+                    }else if(i==6 && j<c){
+                        cout<<"* ";
+                    }else if(i==8 && j<c){
+                        cout<<"* ";
+                    }
+                    else if(i==18 && j<c){
+                        cout<<"* ";
+                    }
+                    else if ((i==0 && j<c) || ((i<r-1 && i!=0) && (j==0 || j==c-1)) || (i==r-1 && j<c))
+                        cout << "* ";
+                    else
+                        cout<<"  ";
+                }
+                        cout << endl;
+            }
+            cout<<endl<<endl;
+
+            cout<<"\t\t\tEnter your Choice : ";
+            cin>>choice;
+
+            switch(choice){
+                case 1:
+                    registerPage();
+                    break;
+                case 2:
+                    loginPage();
+                    break;
+                case 3:
+                    forgotPasswordPage();
+                    break;
+                case 4:
+                    exit(0);
+                    break;
+                default:
+                    system("cls");
+                    cout<<"\n\n\t\tInvalid Input!!! Try Again.....\n\n";
+                    currentPage();
+            }
+        }
+
+        void registerPage(){
+            string userid, password, address, fname, lname, gender, mobile, line, word;
+            int age, temp;
+
+            system("cls");
+            if(temp == 1){
+                cout<<"\n\n\t\tUsername already exist!!! Try again.......\n\n";
+            }
+
+            cout<<"\t\t\t\t         Welcome to State Bank of Bharat";
+            cout<<"---------------------------------------------------------------------------------------------\n";
+            cout<<"\t\t\t\t        Registration Page    \n\n";
+            cout<<"---------------------------------------------------------------------------------------------\n";
+
+            cout<<"\t\t\tEnter your First Name : ";
+            cin>>fname;
+
+            cout<<"\n\t\t\tEnter your Last Name : ";
+            cin>>lname;
+
+            cout<<"\n\t\t\tEnter your Userid : ";
+            cin>>userid;
+
+            // fstream file("database\\"+userid+".txt", ios::out);
+
+            // if(!file.fail()){
+            //     system("cls");
+            //     temp=1;
+            //     registerPage();
+            // }else{
+            //     file<<t_Stamp;
+
+            //     while(getline(file, line)) {
+            //         row.clear();
+        
+            //         stringstream str(line);				//----> ???????????
+        
+            //         while(getline(str, word, ','))
+            //             row.push_back(word);
+            //         content.push_back(row);
+            //     }
+
+                // row.clear();
+                // row.push_back(userid);
+                // content.push_back(row);
+
+                cout<<"\n\t\t\tEnter your Password : ";
+                cin>>password;
+                // row.clear();
+                // row.push_back(password);
+                // content.push_back(row);
+
+                cout<<"\n\t\t\tEnter your Mobile Number : ";
+                cin>>mobile;
+                // row.clear();
+                // row.push_back(mobile);
+                // content.push_back(row);
+
+                cout<<"\n\t\t\tEnter your Address : ";
+                getline(cin, address);
+                // row.clear();
+                // row.push_back(address);
+                // content.push_back(row);
+
+                cout<<"\n\t\t\tEnter your gender : ";
+                cin>>gender;
+
+                cout<<"\n\t\t\tEnter your Age : ";
+                cin>>age;                
+            }
+
+        void loginPage() {
+
+        }
+
+        void forgotPasswordPage() {
+
+        }
 };
 
-// Function to register a new user
-void registerUser(vector<UserAccount> &userAccounts) {
-    UserAccount newUser;
-    
-    cout << "Enter your First Name: ";
-    cin >> newUser.firstName;
-    
-    cout << "Enter your Last Name: ";
-    cin >> newUser.lastName;
-    
-    cout << "Enter your Username: ";
-    cin >> newUser.username;
-    
-    // Check if the username already exists
-    for (const UserAccount &user : userAccounts) {
-        if (user.username == newUser.username) {
-            cout << "Username already exists. Please choose a different username." << endl;
-            return;
-        }
-    }
-    
-    cout << "Enter your Password: ";
-    cin >> newUser.password;
-    
-    cout << "Enter your Mobile Number: ";
-    cin >> newUser.mobile;
-    
-    cout << "Enter your Address: ";
-    cin.ignore(); // Clear the newline character from the buffer
-    getline(cin, newUser.address);
-    
-    cout << "Enter your Gender: ";
-    cin >> newUser.gender;
-    
-    cout << "Enter your Age: ";
-    cin >> newUser.age;
-    
-    // Add the new user to the vector of user accounts
-    userAccounts.push_back(newUser);
-    
-    // Save the user data to a file (e.g., "user_accounts.txt")
-    ofstream outFile("user_accounts.txt", ios::app); // Open the file in append mode
-    if (outFile.is_open()) {
-        outFile << newUser.username << "," << newUser.password << "\n";
-        outFile.close();
-    } else {
-        cerr << "Error: Unable to save user data." << endl;
-    }
-    
-    cout << "Registration successful!" << endl;
-}
+class customisedDashboardPage : public landingPage {
+    public:
+        void customisedPage() {
+            string line, word;
+            int choice;
 
-// Function to log in a user
-bool loginUser(const vector<UserAccount> &userAccounts, string &loggedInUsername) {
-    string username, password;
-    
-    cout << "Enter your Username: ";
-    cin >> username;
-    
-    cout << "Enter your Password: ";
-    cin >> password;
-    
-    // Check if the provided username and password match any user account
-    for (const UserAccount &user : userAccounts) {
-        if (user.username == username && user.password == password) {
-            loggedInUsername = username;
-            return true; // Login successful
-        }
-    }
-    
-    cout << "Login failed. Please check your username and password." << endl;
-    return false; // Login failed
-}
+            int r=11, c=61, i, j;
 
-// Main menu for logged-in users
-void mainMenu(const string &loggedInUsername) {
-    cout << "Welcome, " << loggedInUsername << "!" << endl;
-    
-    // Implement the main menu options here
-    
-    // Example options:
-    cout << "1. Check Balance" << endl;
-    cout << "2. Deposit Money" << endl;
-    cout << "3. Withdraw Money" << endl;
-    cout << "4. Logout" << endl;
-    
-    int choice;
-    cout << "Enter your choice: ";
-    cin >> choice;
-    
-    switch (choice) {
-        case 1:
-            // Implement check balance functionality
-            break;
-        case 2:
-            // Implement deposit money functionality
-            break;
-        case 3:
-            // Implement withdraw money functionality
-            break;
-        case 4:
-            cout << "Logging out..." << endl;
-            break;
-        default:
-            cout << "Invalid choice. Please try again." << endl;
-    }
-}
+            system("cls");
+            cout<<endl<<endl;
 
-int main() {
-    vector<UserAccount> userAccounts;
-    string loggedInUsername;
-    
-    // Load user account data from a file (e.g., "user_accounts.txt")
-    ifstream inFile("user_accounts.txt");
-    if (inFile.is_open()) {
-        string line;
-        while (getline(inFile, line)) {
-            stringstream ss(line);
-            UserAccount user;
-            getline(ss, user.username, ',');
-            getline(ss, user.password);
-            userAccounts.push_back(user);
-        }
-        inFile.close();
-    } else {
-        cerr << "Error: Unable to load user data." << endl;
-    }
-    
-    int choice;
-    
-    do {
-        cout << "Online Banking System" << endl;
-        cout << "1. Register" << endl;
-        cout << "2. Login" << endl;
-        cout << "3. Exit" << endl;
-        cout << "Enter your choice: ";
-        cin >> choice;
-        
-        switch (choice) {
-            case 1:
-                registerUser(userAccounts);
-                break;
-            case 2:
-                if (loginUser(userAccounts, loggedInUsername)) {
-                    mainMenu(loggedInUsername);
+            for(int i=0; i<r; i++){
+                for(int j=0; j<c; j++){
+                    if(i<r && j==0)
+                        cout<<"\t\t\t";
+
+                    if(i==0 && j==1){
+                        cout<<"Author: Divyaveer ";
+                        j+=9;
+                    }
+
+                    // if(i==1 && j==25){
+                    //     cout<<"Welcome "<<content[1][0]<<" ";
+                    //     j+=9;
+                    // }
+
+                    if(i==0 && j==48){
+                        cout<<" Customised Dashboard ";
+                        j+=11;
+                    }
+
+                    if(i==4 && j==4){
+                        cout<<"Press:----";
+                        j+=5;
+                    }
+
+                    if(i==5 && j==6){
+                        cout<<"1. Customer Dashboard ";
+                        j+=11;
+                    }
+
+                    if(i==6 && j==6){
+                        cout<<"2. Add another Account";
+                        j+=11;    
+                    }
+
+                    if(i==7 && j==6){
+                        cout<<"3. Change Password";
+                        j+=9;
+                    }
+
+                    if(i==8 && j==6){
+                        cout<<"4. Logout ";
+                        j+=5;
+                    }
+
+                    if(i==r-1 && j==48){
+                        cout<<t_Stamp;
+                        j=c;
+                    }
+
+                    if(i==r-1 && j==1){
+                        cout<<"Coach : Darshan Sir (TOPS Tech, Ahmedabad) ";
+                        j+=21;
+                    }
+
+                    if(i==2 && j<c)
+                        cout<<"* ";
+                    else if ((i==0 && j<c) || ((i<r-1 && i!=0) && (j==0 || j==c-1)) || (i==r-1 && j<c))
+                        cout << "* ";
+                    else
+                        cout<<"  ";
                 }
-                break;
-            case 3:
-                cout << "Exiting program. Goodbye!" << endl;
-                break;
-            default:
-                cout << "Invalid choice. Please try again." << endl;
+                cout<<endl;
+            }
+
+            cout<<"\n\n\t\t\tEnter your Choice: ";
+            cin>>choice;
+
+            cout<<endl<<endl;
         }
-    } while (choice != 3);
-    
+
+        void customerDashboard() {
+
+        }
+
+        void addAnotherAccount() {
+
+        }
+
+        void changePassword() {
+
+        }
+
+        void logout() {
+
+        }
+};
+class customerDashboardPage {
+    public:
+        class customisedDashboardPage dashboard;
+        string currAcc, ppfAcc;
+        
+        void customerDashboard() {
+            int r=12, c=61, i, j, choice;
+
+            system("cls");
+            cout<<endl<<endl;
+            for(i=0; i<r; i++)
+            {
+                for(j=0; j<c; j++)
+                {   
+                    if(i<r && j==0)
+                        cout<<"\t\t\t";
+
+                    if(i==0 && j==1){
+                        cout<<"Author: Divyaveer ";
+                        j+=9;
+                    }
+
+                    if(i==1 && j==25){
+                        cout<<"Customer Dashboard";
+                        j+=9;
+                    }
+
+                    if(i==4 && j==4){
+                        cout<<"Press:----";
+                        j+=5;
+                    }
+
+                    if(i==5 && j==6){
+                        cout<<"1. View Savings Account ";
+                        j+=12;
+                    }
+
+                    if(i==6 && j==6){
+                        if(currAcc == "y"){
+                            cout<<"2. View Current Account ";
+                            j+=12;
+                        }else if(currAcc != "y" && ppfAcc == "y"){
+                            cout<<"2. View Public Provided Fund Account";
+                            j+=18;
+                        }else if(currAcc != "y" && ppfAcc != "y"){
+                            cout<<"2. Logout ";
+                            j+=5;
+                        }
+                    }
+
+                    if(i==7 && j==6){
+                        if(currAcc == "y" && ppfAcc == "y"){
+                            cout<<"3. View Public Provided Fund Account";
+                            j+=18;
+                        }else if(currAcc == "y" || ppfAcc == "y"){
+                            cout<<"3. Logout ";
+                            j+=5;
+                        }else{
+                            cout<<"3. Back ";
+                            j+=4;
+                        }
+                    }
+
+                    if(i==8 && j==6){
+                        if(currAcc == "y" && ppfAcc == "y"){
+                            cout<<"4. Logout ";
+                            j+=5;
+                        }else if(currAcc == "y" || ppfAcc == "y"){
+                            cout<<"4. Back ";
+                            j+=4;
+                        }
+                    }
+
+                    if(i==9 && j==6){
+                        if(currAcc == "y" && ppfAcc == "y"){
+                            cout<<"5. Back ";
+                            j+=4;
+                        }
+                    }
+
+                    if(i==r-1 && j==48){
+                        cout<<t_Stamp;
+                        j=c;
+                    }
+
+                    if(i==r-1 && j==1){
+                        cout<<"Coach : Darshan Sir (TOPS Tech, Ahmedabad) ";
+                        j+=21;
+                    }
+
+                    if(i==2 && j<c)
+                        cout<<"* ";
+                    else if ((i==0 && j<c) || ((i<r-1 && i!=0) && (j==0 || j==c-1)) || (i==r-1 && j<c))
+                        cout << "* ";
+                    else
+                        cout<<"  ";
+                }
+                        cout << endl;
+            }
+            cout<<endl<<endl;
+
+            cout<<"\t\t\tEnter your Choice : ";
+            cin>>choice;
+
+            if(choice == 1){
+                viewSavingsAccount();
+            }else if(choice == 2){
+                if(currAcc == "y" && ppfAcc != "y"){
+                    viewCurrentAccount();
+                }else if(ppfAcc == "y" && currAcc != "y"){
+                    viewPublicProvidedFundAccount();
+                }else if(currAcc != "y" || ppfAcc != "y"){
+                    dashboard.logout();
+                }
+            }else if(choice == 3){
+                if(currAcc == "y"){
+                    viewPublicProvidedFundAccount();
+                }else if(currAcc != "y" || ppfAcc != "y"){
+                    dashboard.logout();
+                }else if(currAcc != "y" && ppfAcc != "y"){
+                    back();
+                }
+            }else if(choice == 4){
+                if(currAcc == "y" && ppfAcc == "y"){
+                    dashboard.logout();
+                }else if(currAcc != "y" || ppfAcc != "y"){
+                    back();
+                }
+            }else if(choice == 5){
+                back();
+            }
+        }
+
+        void viewSavingsAccount() {
+
+        }
+
+        void viewCurrentAccount() {
+
+        }
+
+        void viewPublicProvidedFundAccount() {
+
+        }
+
+        void back() {
+            dashboard.customisedPage();
+        }
+};
+
+class accountServices : public customisedDashboardPage {
+    public:
+        void currentPage() {
+            int r=15, c=61, i, j, choice;
+
+            system("cls");
+            cout<<endl<<endl;
+            for(i=0; i<r; i++){
+                for(int j=0; j<c; j++){
+                    if(i<r && j==0)
+                        cout<<"\t\t\t";
+
+                    if(i==0 && j==1){
+                        cout<<"Author: Divyaveer ";
+                        j+=9;
+                    }
+
+                    if(i==1 && j==30){
+                        cout<<"Services";
+                        j+=4;
+                    }
+
+                    if(i==4 && j==4){
+                        cout<<"Press:----";
+                        j+=5;
+                    }
+
+                    if(i==5 && j==6){
+                        cout<<"1. Check Avalable Balance ";
+                        j+=13;
+                    }
+
+                    if(i==6 && j==6){
+                        cout<<"2. Deposit Money";
+                        j+=8;
+                    }
+
+                    if(i==7 && j==6){
+                        cout<<"3. Withdraw Money ";
+                        j+=9;
+                    }
+
+                    if(i==8 && j==6){
+                        cout<<"4. Change Address ";
+                        j+=9;
+                    }
+
+                    if(i==9 && j==6){
+                        cout<<"5. Change Mobile No.";
+                        j+=10;
+                    }
+
+                    if(i==10 && j==6){
+                        cout<<"6. Last Logged on ";
+                        j+=9;
+                    }
+
+                    if(i==11 && j==6){
+                        cout<<"7. Dashboard";
+                        j+=6;
+                    }
+                    
+                    if(i==12 && j==6){
+                        cout<<"8. Logout ";
+                        j+=5;
+                    }
+
+                    if(i==r-1 && j==1){
+                        cout<<"Coach : Darshan Sir (TOPS Tech, Ahmedabad)";
+                        j+=21;
+                    }
+
+                    if(i==2 && j<c)
+                        cout<<"* ";
+                    else if ((i==0 && j<c) || ((i<r-1 && i!=0) && (j==0 || j==c-1)) || (i==r-1 && j<c))
+                        cout << "* ";
+                    else
+                        cout<<"  ";
+                }
+                cout<<endl;
+            }
+            cout<<endl<<endl;
+
+            cout<<"\t\t\tEnter your Choice : ";
+            cin>>choice;
+
+            if(choice == 1)
+                checkBalance();
+            else if(choice == 2)
+                deposit();
+            else if(choice == 3)
+                withdraw();
+            else if(choice == 4)
+                changeAddress();
+            else if(choice == 5)
+                changeMobileNo();
+            else if(choice == 6)
+                lastLoggedOn();
+            else if(choice == 7)
+                back();
+            else if(choice == 8)
+                logout();
+
+            cout<<endl<<endl;
+        }
+
+    void checkBalance() {
+
+    }
+
+    void deposit() {
+
+    }
+
+    void withdraw() {
+
+    }
+
+    void changeAddress() {
+
+    }
+
+    void changeMobileNo() {
+
+    }
+
+    void lastLoggedOn() {
+
+    }
+
+    void back() {
+
+    }
+
+};
+
+int main(){
+    landingPage page;
+
+    page.currentPage();
+
     return 0;
 }
