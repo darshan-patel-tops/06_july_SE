@@ -126,7 +126,7 @@ class landingPage {
 
         void registerPage(){
             string userid, password, address, fname, lname, gender, mobile, line, word;
-            int age, temp;
+            int age, temp=0;
 
             system("cls");
             if(temp == 1){
@@ -183,6 +183,7 @@ class landingPage {
                 // content.push_back(row);
 
                 cout<<"\n\t\t\tEnter your Address : ";
+                cin.ignore(); 
                 getline(cin, address);
                 // row.clear();
                 // row.push_back(address);
