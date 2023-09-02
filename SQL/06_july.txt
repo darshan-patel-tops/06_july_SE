@@ -1,0 +1,49 @@
+CRUD
+CREATE
+READ
+UPDATE
+DELETE
+
+
+
+
+CREATE DATABASE 06_july_se
+
+DROP DATABASE 06_july_se
+
+
+CREATE TABLE users
+(
+	user_id int PRIMARY KEY AUTO_INCREMENT,
+    username varchar(255) UNIQUE KEY,
+    email varchar(255) UNIQUE KEY,
+    mobile varchar(255) UNIQUE KEY,
+    password varchar(255)
+);
+
+DROP TABLE users
+
+INSERT INTO  users VALUES(1,"neet","neet","123","123")
+
+INSERT INTO  users(username,email,password,mobile) VALUES("neet1","neet1","123456","+91")
+
+INSERT INTO  users(email,password,mobile,username) VALUES("neet12","neet1","1234567","+91")
+
+INSERT INTO users(username,email,password,mobile) VALUES ("neet1","neet1","neet1","neet1"),("divyaveer","divyaveer","d","d"),("himnashu","himanshu","h","h")
+
+
+
+SELECT * FROM users
+
+SELECT * FROM users WHERE user_id = 1
+SELECT * FROM users WHERE username = "neet"
+SELECT username,email FROM users WHERE username = "neet"
+SELECT username FROM users WHERE username = "neet"
+
+
+
+
+TRUNCATE TABLE users
+
+
+
