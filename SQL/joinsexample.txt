@@ -1,0 +1,98 @@
+==============================================================================
+Officer table
+==============================================================================
+
+create table officers(
+officer_id int PRIMARY KEY AUTO_INCREMENT NOT Null,
+officer_name varchar(20) not null,
+address varchar(50) NOT NULL  
+);
+
+
+insert into officers (officer_name,address) values ("jay","ahmedabad"), 
+("vijay","surat"),
+("ajay","baroda"),
+("sanjay","rajkot")
+
+==============================================================================
+Student table
+==============================================================================
+
+create table students(
+student_id int PRIMARY KEY AUTO_INCREMENT NOT Null,
+student_name varchar(20) not null,
+course_name varchar(20) NOT NULL
+);
+
+insert into students(student_name,course_name) values ("hitesh","S.E + Python"), 
+("mohit","S.E + Python"),
+("jay","S.E"),
+
+
+==============================================================================
+INNER Join ::-- It means Simple Join.....
+==============================================================================
+-->> A join clause is used to combine rows from two or more tables, based on a related column between them.
+------------
+Syntax :
+------------
+SELECT columns  
+FROM table1   
+INNER JOIN table2  
+ON table1.column = table2.column;  
+
+------------
+Example :
+------------
+SELECT officers.officer_name, officers.address, students.course_name 
+FROM officers   
+INNER JOIN students  
+ON officers.officer_id = students.student_id;  
+    
+==============================================================================
+MySQL Left Outer Join or Left Join
+==============================================================================
+
+------------
+Syntax :
+------------
+
+SELECT columns  
+FROM table1  
+LEFT [OUTER] JOIN table2  
+ON table1.column = table2.column; 
+
+------------
+Example
+------------
+
+SELECT  officers.officer_name, officers.address, students.course_name  
+FROM officers  
+LEFT JOIN students  
+ON officers.officer_id = students.student_id; 
+
+
+==============================================================================
+MySQL Right Outer Join or Right Join
+==============================================================================
+
+------------
+Syntax :
+------------
+SELECT columns  
+FROM table1  
+RIGHT [OUTER] JOIN table2  
+ON table1.column = table2.column;  
+
+------------
+Example :
+------------
+
+SELECT officers.officer_name, officers.address, students.course_name, students.student_name  
+FROM officers  
+RIGHT JOIN students  
+ON officers.officer_id = students.student_id;  
+
+
+
+

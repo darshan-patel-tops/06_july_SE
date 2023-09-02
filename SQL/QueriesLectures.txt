@@ -1,0 +1,184 @@
+
+create database mydatabase
+
+create table users(userid int(10) primary key auto_increment)
+
+ALTER TABLE users_tbl ADD username varchar(50)
+
+ALTER TABLE users_tbl ADD (Password varchar(50),gender varchar(20),mmmmobile  int)
+
+ALTER TABLE users_tbl CHANGE mmmmobile mobile bigint
+
+ALTER TABLE users_tbl DROP mobile 
+
+ALTER TABLE `users_tbl` ADD `email` VARCHAR(50) NOT NULL AFTER `gender`;
+
+INSERT INTO `users_tbl` (`userid`, `username`, `Password`, `gender`, mobile) VALUES (NULL, 'a', 'a', 'a', '9662216697');
+
+DELETE FROM user_contact WHERE contact_id=2
+
+DELETE FROM user_contact 
+
+truncate table user_contact
+
+DROP TABLE user_contact
+
+
+ALTER TABLE `user_contact` ADD FOREIGN KEY (`usrid`) REFERENCES `users_tbl`(`userid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+create procedure getuserdatabyid (inout uid int)
+	select * from users_tbl_new where userid = uid
+
+SET @p0='7'; CALL `getuserdatabyid`(@p0); SELECT @p0 AS `uid`;
+
+
+CREATE TRIGGER update_pass BEFORE UPDATE ON users_tbl_new FOR EACH ROW INSERT INTO user_pass_backup SET user_id=OLD.userid, password=OLD.password, data=now()
+
+
+
+
+
+PrimaryKeyb => unique and not null
+unique => allowed null at once
+candidate/composite => combinatiaon of tow or more than tow clms and force to act as PK
+FK => Reference key one tabl PK cn be act as FK for the other tbl
+
+
+normalisation
+
+divide table into diff tabl
+
+
+SELECT * FROM `tblresult` JOIN tblstudents
+ON tblresult.StudentId = tblstudents.StudentId
+
+
+
+
+SELECT * FROM `tblresult` JOIN tblstudents
+ON tblresult.StudentId = tblstudents.StudentId
+JOIN tblsubjects
+ON tblresult.SubjectId = tblsubjects.id
+
+
+
+SELECT * FROM `tblresult` JOIN tblstudents
+ON tblresult.StudentId = tblstudents.StudentId
+JOIN tblsubjects
+ON tblresult.SubjectId = tblsubjects.id
+JOIN tblclasses
+ON tblclasses.id = tblresult.ClassId
+
+
+
+
+
+
+
+
+
+SELECT tblresult.id,tblstudents.studentid ,studentname AS StdntName,tblsubjects.SubjectName,tblresult.marks FROM `tblresult` JOIN tblstudents
+ON tblresult.StudentId = tblstudents.StudentId
+JOIN tblsubjects
+ON tblresult.SubjectId = tblsubjects.id
+JOIN tblclasses
+ON tblclasses.id = tblresult.ClassId
+
+
+SELECT * FROM `tblresult` LEFT JOIN tblstudents ON tblresult.StudentId = tblstudents.StudentId;
+
+SELECT * FROM `tblresult` RIGHT JOIN tblstudents ON tblresult.StudentId = tblstudents.StudentId;
+
+
+
+
+
+SELECT * FROM `tblresult` RIGHT JOIN tblstudents ON tblresult.StudentId = tblstudents.StudentId WHERE id IS null;
+
+
+
+SELECT tblresult.id,tblstudents.studentid ,studentname AS StdntName,SUM(tblresult.marks) AS TotalMarks, AVG(tblresult.marks) AS AVGMarks, MIN(tblresult.marks) AS LowMarks,MAX(tblresult.marks) AS HighMarks FROM `tblresult` JOIN tblstudents
+ON tblresult.StudentId = tblstudents.StudentId
+JOIN tblsubjects
+ON tblresult.SubjectId = tblsubjects.id
+JOIN tblclasses
+ON tblclasses.id = tblresult.ClassId
+GROUP BY tblresult.StudentId
+
+
+
+
+SELECT tblresult.id,tblstudents.studentid ,studentname AS StdntName,tblsubjects.SubjectName,tblresult.marks FROM `tblresult` JOIN tblstudents
+ON tblresult.StudentId = tblstudents.StudentId
+JOIN tblsubjects
+ON tblresult.SubjectId = tblsubjects.id
+JOIN tblclasses
+ON tblclasses.id = tblresult.ClassId
+ORDER BY tblresult.marks DESC LIMIT 1
+
+
+
+SELECT tblresult.id,tblstudents.studentid ,studentname AS StdntName,tblsubjects.SubjectName,tblresult.marks FROM `tblresult` JOIN tblstudents
+ON tblresult.StudentId = tblstudents.StudentId
+JOIN tblsubjects
+ON tblresult.SubjectId = tblsubjects.id
+JOIN tblclasses
+ON tblclasses.id = tblresult.ClassId
+WHERE tblsubjects.SubjectName="Maths"
+
+
+
+SELECT tblresult.id,tblstudents.studentid ,studentname AS StdntName,tblsubjects.SubjectName,tblresult.marks FROM `tblresult` JOIN tblstudents
+ON tblresult.StudentId = tblstudents.StudentId
+JOIN tblsubjects
+ON tblresult.SubjectId = tblsubjects.id
+JOIN tblclasses
+ON tblclasses.id = tblresult.ClassId
+WHERE tblsubjects.SubjectName="Maths" AND tblstudents.StudentId=1
+
+
+
+SELECT DISTINCT(StudentName)  FROM tblstudents WHERE StudentName LIKE "%r%"
+
+
+8.3.1 How MySQL Uses Indexes
+Indexes are used to find rows with specific column values quickly. Without an index, MySQL must begin with the first row and then read through the entire table to find the relevant rows. The larger the table, the more this costs. If the table has an index for the columns in question, MySQL can quickly determine the position to seek to in the middle of the data file without having to look at all the data. This is much faster than reading every row sequentially.
+
+Most MySQL indexes (PRIMARY KEY, UNIQUE, INDEX, and FULLTEXT) are stored in B-trees. Exceptions: Indexes on spatial data types use R-trees; MEMORY tables also support hash indexes; InnoDB uses inverted lists for FULLTEXT indexes.
+ALTER TABLE `users` ADD INDEX(`username`);
+create index country_id_index on country(country_id);
+
+
+6.1.5 Working with Stored Procedures
+This section illustrates how to work with stored procedures. Putting database-intensive operations into stored procedures lets you define an API for your database application. You can reuse this API across multiple applications and multiple programming languages. This technique avoids duplicating database code, saving time and effort when you make updates due to schema changes, tune the performance of queries, or add new database operations for logging, security, and so on. Before working through this tutorial, familiarize yourself with the CREATE PROCEDURE and CREATE FUNCTION statements that create different kinds of stored routines.
+
+For the purposes of this tutorial, you will create a simple stored procedure to see how it can be called from MySQL Connector/NET. In the MySQL Client program, connect to the world database and enter the following stored procedure:
+
+
+DELIMITER //
+CREATE PROCEDURE country_hos
+(IN con CHAR(20))
+BEGIN
+  SELECT Name, HeadOfState FROM Country
+  WHERE Continent = con;
+END //
+DELIMITER ;
+
+CREATE PROCEDURE selectuser (INOUT uname varchar(50)) SELECT * FROM users WHERE username = uname;
+SET @p0='test'; CALL `selectuser`(@p0); SELECT @p0 AS `uname`;
+
+
+
+25.3.1 Trigger Syntax and Examples
+To create a trigger or drop a trigger, use the CREATE TRIGGER or DROP TRIGGER statement, described in Section 13.1.22, “CREATE TRIGGER Statement”, and Section 13.1.34, “DROP TRIGGER Statement”.
+
+Here is a simple example that associates a trigger with a table, to activate for INSERT operations. The trigger acts as an accumulator, summing the values inserted into one of the columns of the table.
+
+
+
+
+
+ALTER TABLE `userpassbk` ADD FOREIGN KEY (`userid`) REFERENCES `users`(`userid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+CREATE TRIGGER updateupass BEFORE UPDATE ON users FOR EACH ROW INSERT INTO userpassbk SET password=OLD.password, userid=OLD.userid, date = NOW();

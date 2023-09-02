@@ -1,0 +1,57 @@
+CRUD
+CREATE
+READ
+UPDATE
+DELETE
+
+
+
+
+create databse 15_aug
+
+
+CREATE TABLE users
+(
+	user_id int PRIMARY KEY AUTO_INCREMENT,
+    email varchar(50) UNIQUE KEY,
+    username varchar(50) UNIQUE KEY,
+    PASSWORD varchar(50),
+    name varchar(50)
+
+
+)
+
+
+INSERT INTO users VALUES(1,"admin@mail.com","admin","12345678","Admin")
+INSERT INTO users(name,PASSWORD,email,username) VALUES("admin@mail.com","admin","12345678","Admin1")
+
+INSERT into users (email,username,PASSWORD,name) VALUES ("dev@mail.com","dev","12345678","dev"),("jatin@mail.com","jatin","12345678","jhatin"),("yash@mail.com","yash","12345688","yash"),("dhruvin@mail.com","dhruvin","12345687","dhruvin")
+
+SELECT * from users
+SELECT username,email from users
+SELECT * from users WHERE user_id =3
+SELECT * from users WHERE name ="admin"
+
+SELECT * from users WHERE user_id <= 6
+
+
+UPDATE users  SET name = "check" 
+UPDATE users  SET email = "123@mail.com" WHERE user_id =3
+
+
+DELETE from users
+DELETE from users where user_id = 6
+
+
+
+DROP TABLE user
+drop database 15_aug_laravel
+TRUNCATE TABLE users
+
+
+
+
+SELECT * from users LEFT JOIN posts on users.user_id = posts.uid
+SELECT * from users RIGHT JOIN posts on users.user_id = posts.uid
+SELECT * from posts  INNER JOIN users on users.user_id = posts.uid
+SELECT * from posts  FULL OUTER JOIN users on users.user_id = posts.uid

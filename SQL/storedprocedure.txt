@@ -1,0 +1,85 @@
+
+Stored Procedure is use like a function in C/C++
+
+1) Simple
+
+
+Syntax:
+
+1) Create a Procedure :
+
+	Delimiter $$
+	create procedure procedure_name()
+	begin
+		some query
+	end
+
+	$$
+================================================
+
+2) Calling a Procedure
+
+
+call procedure_name();
+
+===============================================
+Example: 1
+
+DELIMITER $$
+
+CREATE PROCEDURE insertdata()
+BEGIN
+	INSERT into employee (ename,esal,email) VALUES ('nirav','patel','nirav@gmail.com');
+END
+
+call insertdata()
+
+Example 2:
+
+
+DELIMITER $$
+CREATE PROCEDURE updatedata()
+BEGIN
+	UPDATE employee SET email ='sumit@gmail.com' WHERE id=3;
+END
+$$
+
+call updatedata()
+
+BEGIN
+	insert into employee (ename,esal,email) VALUES (name,salary,emp_email);
+END
+
+
+Begin
+
+Declare usal int;
+
+	select salary into usal from person where p_id=uid;
+
+	if(usal > 10000) THEN
+	  
+	      SET  result="good";
+
+	else
+	     SET result="bad";
+	
+	End if;
+	
+End;
+
+
+
+
+BEGIN
+	updata employee SET
+    email = e_email
+    WHERE id = eid;
+END
+
+
+
+
+
+
+$$

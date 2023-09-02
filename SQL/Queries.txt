@@ -1,0 +1,36 @@
+
+create database mydatabase
+
+create table users(userid int(10) primary key auto_increment)
+
+ALTER TABLE users_tbl ADD username varchar(50)
+
+ALTER TABLE users_tbl ADD (Password varchar(50),gender varchar(20),mmmmobile  int)
+
+ALTER TABLE users_tbl CHANGE mmmmobile mobile bigint
+
+ALTER TABLE users_tbl DROP mobile 
+
+ALTER TABLE `users_tbl` ADD `email` VARCHAR(50) NOT NULL AFTER `gender`;
+
+INSERT INTO `users_tbl` (`userid`, `username`, `Password`, `gender`, mobile) VALUES (NULL, 'a', 'a', 'a', '9662216697');
+
+DELETE FROM user_contact WHERE contact_id=2
+
+DELETE FROM user_contact 
+
+truncate table user_contact
+
+DROP TABLE user_contact
+
+
+ALTER TABLE `user_contact` ADD FOREIGN KEY (`usrid`) REFERENCES `users_tbl`(`userid`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+create procedure getuserdatabyid (inout uid int)
+	select * from users_tbl_new where userid = uid
+
+SET @p0='7'; CALL `getuserdatabyid`(@p0); SELECT @p0 AS `uid`;
+
+
+CREATE TRIGGER update_pass BEFORE UPDATE ON users_tbl_new FOR EACH ROW INSERT INTO user_pass_backup SET user_id=OLD.userid, password=OLD.password, data=now()

@@ -1,0 +1,98 @@
+SQl Commands:
+
+1. DDL : data definition language
+-CREATE
+-ALTER
+-TRUNCATE
+-DROP
+2. DML : Data Manipulation Language
+-INSERT
+-UPDATE
+-DELETE
+3. DQL : data query language
+-SELECT
+4. DCL : data transaction control language
+-COMMIT
+-ROLLBACK
+
+-primary key: always int.never allow null value. use to identify record uniquly
+-Unique key : same as primary key. it allows null values
+-Foreign Key :DUPLICATE KEY
+
+sql Aggrigate functions
+1. SUM
+2. MAX
+3. MIN
+4. COUNT
+5. FIRST
+6. LAST
+7. AVG
+
+
+#ORDERBY : Ascending & Descending Order 
+#GROUPBY and Having caluse
+
+#JOIN
+1. inner join/join
+2. outer join
+	-left outer join
+	-right outer join
+3. Full join
+
+
+
+1. CREATE DATABASE laravel
+2. CREATE TABLE Person(id INT PRIMARY KEY AUTO_INCREMENT,name varchar(50),email varchar(50))
+3. ALTER TABLE person ADD(salary int)
+4. INSERT INTO person (name,email,salary) VALUES ('darshan','darshan@gmail.com',12000)
+5. SELECT * FROM person
+6. SELECT * FROM person WHERE id=2
+7. SELECT email FROM person
+8. SELECT email FROM person WHERE id=1
+9. UPDATE person SET name ="demo",email="demo@gmail.com",salary=3000 WHERE id=2
+10. DELETE from person WHERE id=2
+11. DELETE from person WHERE id=3;
+COMMIT
+12. DELETE from person WHERE id=3;
+ROLLBACK
+13. TRUNCATE TABLE person
+14. DROP TABLE person
+15. select SUM(salary) as Total_salary  from person;
+16. select COUNT(salary) as Total_salary  from person;
+17. select MIN(salary) as Total_salary  from person;
+18. select MAX(salary) as Total_salary  from person;
+19. SELECT * FROM person ORDER BY name
+20. SELECT * FROM person ORDER BY name DESC;
+21. CREATE TABLE country(cid int PRIMARY KEY AUTO_INCREMENT, cname varchar(50))
+22. CREATE  TABLE customer(id int AUTO_INCREMENT,name varchar(50),password varchar(50),country int,PRIMARY KEY(id),FOREIGN KEY(country) REFERENCES country(cid))
+23. select * from customer join country on customer.country = country.cid
+24. select customer.name,country.cname from customer JOIN country on customer.country = country.cid
+25. select customer.name,country.cname from customer JOIN country on customer.country = country.cid WHERE customer.id=2;
+25. SELECT * from customer LEFT JOIN country on customer.country = country.cid
+26. SELECT * from customer RIGHT JOIN country on customer.country = country.cid
+27. CREATE VIEW myview as SELECT name from person
+26. SELECT name from customer WHERE name LIKE '%a'
+27. SELECT SUM(salary),name FROM person GROUP BY name;
+28. SELECT COUNT(name),name,salary from person GROUP BY name having salary>10000
+29. CREATE INDEX myindex on person(salary)
+30.  DELIMITER //
+CREATE PROCEDURE my_pro(IN number int(10))
+ BEGIN
+ SELECT * FROM person WHERE salary = number;
+ END //
+DELIMITER ;
+31. delimiter //
+create procedure tops_cursor()
+begin
+DECLARE whatever BOOLEAN DEFAULT FALSE;   
+declare cs1 cursor for select name from custmoer;
+end //
+32. CREATE TRIGGER ins_sum BEFORE INSERT ON person
+       FOR EACH ROW SET @sum = @sum + NEW.salary;
+33. DECLARE MY_CUSR CURSOR FOR SELECT * FROM CUSTOMERS;
+OPEN MY_CUSR;
+FETCH NEXT FROM MY_CUSR;
+CLOSE MY_CUSR;
+DEALLOCATE MY_CUSR;
+
+

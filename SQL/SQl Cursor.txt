@@ -1,0 +1,70 @@
+Cursor: it is used to traverse data from one table to another
+
+DECLARE == OPEN  ===> FETCH  ===> CLOSE
+
+
+
+==> A cursor in database is a construct which allows
+ you to iterate/traversal the records of a table. 
+In MySQL you can use cursors with in a stored program s
+uch as procedures, functions etc.
+
+In other words, you can iterate though the records of a table
+ from a MySQL stored program using the cursors. 
+
+
+Example
+Assume we have created a table with name tutorials in MySQL database using CREATE statement as shown below −
+
+CREATE TABLE tutorials (
+   ID INT PRIMARY KEY,
+   TITLE VARCHAR(100),
+   AUTHOR VARCHAR(40),
+   DATE VARCHAR(40)
+);
+
+Now, we will insert 5 records in tutorials table using INSERT statements −
+
+insert into tutorials values(1, 'Java', 'Krishna', '2019-09-01');
+insert into tutorials values(2, 'JFreeCharts', 'Satish', '2019-05-01');
+insert into tutorials values(3, 'JavaSprings', 'Amit', '2019-05-01');
+insert into tutorials values(4, 'Android', 'Ram', '2019-03-01');
+insert into tutorials values(5, 'Cassandra', 'Pruthvi', '2019-04-06')
+
+
+
+Let us create another table to back up the data −
+
+CREATE TABLE backup (
+   ID INT,
+   TITLE VARCHAR(100),
+   AUTHOR VARCHAR(40),
+   DATE VARCHAR(40)
+);
+
+Following procedure backups the contents of the tutorials table to the backup table using cursors −
+
+DELIMITER //
+CREATE PROCEDURE ExampleProc()
+   BEGIN
+      DECLARE done INT DEFAULT 0;
+      DECLARE tutorialID INTEGER;
+      DECLARE tutorialTitle, tutorialAuthor, tutorialDate VARCHAR(20);
+      DECLARE cur CURSOR FOR SELECT * FROM tutorials;
+      DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+      OPEN cur;
+      label: LOOP
+      FETCH cur INTO tutorialID, tutorialTitle, tutorialAuthor, tutorialDate;
+      INSERT INTO backup VALUES(tutorialID, tutorialTitle, tutorialAuthor, tutorialDate);
+      IF done = 1 THEN LEAVE label;
+      END IF;
+      END LOOP;
+      CLOSE cur;
+   END//
+DELIMITER ;
+
+
+==>  CALL ExampleProc;
+
+
+

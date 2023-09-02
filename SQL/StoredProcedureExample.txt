@@ -1,0 +1,114 @@
+
+
+example : https://www.youtube.com/watch?v=xIipbXfLAY4
+
+================================================================
+Syntax :
+================================================================
+
+	create procedure procedure_name
+		
+	            begin
+		   
+		  select * from table_name;
+	           end;
+
+	call procedure_name();	
+
+================================================================
+
+1) Consider a table. employees
+================================================================
+Example 1.
+================================================================
+-> Now Create a Procedure
+
+1) Select the Database 
+2) Goto Routines -> Create a new routine-
+3) Give the name to procedure >>getUserInfo
+4) Select the parameters i.e IN,variable_name  i.e(uid)
+And Add in Definition
+
+Begin
+	select * from employees where employeeNumber=uid;
+End;
+
+->>>>>>>>>>After saving
+
+
+Execute the procedure.
+================================================================
+
+================================================================
+Example 2.
+================================================================
+
+1) Select the Database 
+2) Goto Routines -> Create a new routine
+3) Give the name to procedure ->-> getUserInfo1
+4) Select the parameters i.e IN,variable_name i.e(uid) and OUT,variable_name i.e (uname)
+And Add in Definition
+
+Begin
+	select fname into uname from employees where employeeNumber=uid;
+End;
+
+->>>>>>>>>>After saving
+
+
+Execute the procedure.
+
+================================================================
+Example 3.
+================================================================
+
+1) Select the Database 
+2) Goto Routines -> Create a new routine
+3) Give the name to procedure ->-> insertData
+4) Select the parameters i.e IN,variable_name i.e(ufname) and IN variable_name i.e (ulname)and IN variable_name i.e (uemail)
+And Add in Definition
+
+Begin
+	insert into employees(fname,lname,email) values (ufname,ulname,uemail);
+End;
+
+->>>>>>>>>>After saving
+
+
+Execute the procedure.
+
+
+================================================================
+Example 4.
+================================================================
+
+1) Select the Database 
+2) Goto Routines -> Create a new routine
+3) Give the name to procedure ->-> CalculateSalary
+4) Select the parameters i.e IN,variable_name i.e(uid) and OUT,variable_name i.e(result)
+And Add in Definition
+
+Begin
+
+Declare usal int;
+
+	select salary into usal from person where p_id=uid;
+
+	if(usal > 10000) THEN
+	  
+	      SET  result="good";
+
+	else
+	     SET result="bad";
+	
+	End if;
+	
+End;
+
+->>>>>>>>>>After saving
+
+
+Execute the procedure.
+
+
+

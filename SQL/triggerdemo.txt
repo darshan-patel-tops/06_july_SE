@@ -1,0 +1,113 @@
+=================
+Trigger:
+=================
+A trigger is a set of actions that are run automatically when a specified change operation (SQL INSERT, UPDATE, or DELETE statement) is performed on a specified table. Triggers are useful for tasks such as enforcing business rules, validating input data, and keeping an audit trail.
+
+===========================================================================================
+The CREATE TRIGGER statement creates a new trigger. Here is the basic syntax of the CREATE TRIGGER statement:
+===========================================================================================
+Syntax :
+
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE| DELETE }
+ON table_name FOR EACH ROW
+trigger_body;
+
+
+
+In this syntax:
+
+1) First, specify the name of the trigger that you want to create after the CREATE TRIGGER keywords. Note that the trigger name must be unique within a database.
+
+2) Next, specify the trigger action time which can be either BEFORE or AFTER which indicates that the trigger is invoked before or after each row is modified.
+
+3) Then, specify the operation that activates the trigger, which can be INSERT, UPDATE, or DELETE.
+
+4) After that, specify the name of the table to which the trigger belongs after the ON keyword.
+
+Finally, specify the statement to execute when the trigger activates. If you want to execute multiple statements, you use the BEGIN END compound statement.
+
+===========================================================================================
+MySQL trigger examples
+===========================================================================================
+
+1-
+
+create table employees(
+  employeeNumber int PRIMARY KEY AUTO_INCREMENT NOT Null,
+  lname varchar(20) NOT null,
+  fname varchar(20) NOT null,
+  email varchar(20) NOT null
+);
+------------------------------------------
+2-
+ 
+insert into employees(fname,lname,email) values ("hitesh","gajeria","h@gmail.com"),
+("jitesh","kajeria","j@gmail.com"),
+("mitesh","dajeria","m@gmail.com"),
+("ritesh","rajeria","r@gmail.com"),
+("nitesh","tajeria","n@gmail.com")
+
+---------------------------------------------
+First, create a new table named employees_audit to keep the changes to the employees table:
+
+CREATE TABLE employees_audit (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    employeeNumber INT NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    changedat DATETIME DEFAULT NULL,
+    action VARCHAR(50) DEFAULT NULL
+);
+------------------------------------------------
+Next, create a BEFORE UPDATE trigger that is invoked before a change is made to the employees table.
+
+-
+
+CREATE TRIGGER before_employee_update 
+    BEFORE UPDATE ON employees
+    FOR EACH ROW 
+ INSERT INTO employees_audit
+ SET action = 'update',
+     employeeNumber = OLD.employeeNumber,
+     lastname = OLD.lname,
+     changedat = NOW();
+
+
+Inside the body of the trigger, we used the OLD keyword to access values of the columns employeeNumber and lastname of the row affected by the trigger.
+
+--------------------------------------------------
+
+Then, show all triggers in the current database by using the SHOW TRIGGERS statement:
+
+-
+
+SHOW TRIGGERS;
+
+--------------------------------------------------
+After that, update a row in the employees table:
+
+-
+
+UPDATE employees 
+SET 
+    lname = 'kankaria'
+WHERE
+    employeeNumber = 1;
+
+
+-------------------------------------------------
+
+Finally, query the employees_audit table to check if the trigger was fired by the UPDATE statement:
+
+-
+
+SELECT * FROM employees_audit;
+
+
+As you see clearly from the output, the trigger was automatically invoked and inserted a new row into the employees_audit table.
+---------------------------------------------------
+
+===========================================================================================
+
+
+

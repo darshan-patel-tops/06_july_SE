@@ -1,0 +1,92 @@
+Cursor:
+
+Cursor allows to iterate a set of rows returned by query and process them accordingly.
+
+we create cursor inside procedure to handle the result set returned by query.
+ only read only.
+
+
+steps to follow:
+
+select any table
+declare cursor
+open cursor
+fetch row
+close cursor
+
+if we want to fetch records row by row and store some variable
+
+AAA		20000
+BBB		30000
+CCC		15000
+
+after cursor
+First row will fetch
+vname = aaaa;
+vsal = 20000
+
+
+Cursor:
+Delimiter /
+
+Create procedure pro_emp()
+begin
+
+declare name varchar(20);
+declare salary varchar(20);
+
+declare i int default 0;
+
+declare c1 cursor for select name, salary from emp_tb;
+
+declare continue handler for NOT FOUND set i = 1;
+
+open c1;
+
+get_emp : loop
+
+	fetch c1 into name,salary;
+	if i=1 then get_emp;
+
+	end if;
+
+select concat(name, concate('-',salary));
+
+end loop get_emp;
+
+close c1;
+
+end /
+
+
+
+call procedure pro_emp1();/
+
+drop procedure pro_emp;/
+
+==========================================================
+
+
+Trigger:
+
+Only activates when a perticular event occurs.
+
+Task we want to executes procedure or commands after or before insert update and delete.
+
+if we have table marks
+
+create table marks(mid int(11) , m1 int(11), m2 int(11), tot int(11) );
+
+insert into marks values(1, 90, 80,9);
+
+create trigger t1
+ before insert on marks
+ for each row 
+begin set
+ new.tot = new.m1 + new.m2;
+end;
+/
+
+insert into marks values(11, 50,30,0) /
+
+select * from marks/

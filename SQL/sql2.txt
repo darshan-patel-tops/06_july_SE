@@ -1,0 +1,180 @@
+CRUD
+
+Create
+Read
+Update
+Delete
+
+sql Aggrigate functions
+1. SUM
+2. MAX
+3. MIN
+4. COUNT
+5. FIRST
+6. LAST
+7. AVG
+
+Where
+
+
+
+CREATE DATABASE 19jun_se
+
+CREATE table sunil 
+(
+    id int PRIMARY key AUTO_INCREMENT
+);
+    
+
+create table users
+(
+	id int PRIMARY key AUTO_INCREMENT,
+    name varchar(50),
+ mobile varchar(50),
+ username varchar(50) UNIQUE KEY,
+ email varchar(50) UNIQUE KEY
+);
+
+alter table users add (password varchar(50));
+
+INSERT into users (name,username) VALUES ('admin','admin_123');
+
+INSERT into users (name,username,email) VALUES ('admin','admin_1234','admin@mail.com');
+INSERT into users (name,username,email,password) VALUES ('admin','admin_12345','admi1n@mail.com','123456789');
+INSERT into users (name) VALUES ('admin');
+
+SELECT * from users
+SELECT name from users
+SELECT name,email from users
+
+
+SELECT * from users where id =3;
+
+
+UPDATE  users  SET name = 'admin1' where id = 5;
+UPDATE users SET name = "admin2" , mobile = "9999999999" where id =3;
+
+DELETE from users
+DELETE from users where id =6;
+
+create table users (id int PRIMARY key AUTO_INCREMENT,username varchar(50) UNIQUE,email varchar(50) UNIQUE,mobile varchar(50),password varchar(50))
+
+alter table users ADD (birthday varchar(50))
+
+INSERT into users(username,email,mobile,password,birthday) VALUES('brijesh','brijesh@mail.com','12312123','123','27')
+
+SELECT * from users
+SELECT  email  from users
+
+
+drop table users
+TRUNCATE table users
+
+
+DELETE from persons where id =1;
+COMMIT
+
+DELETE from persons where id =2;
+ROLLBACK
+
+as stands for alias
+
+SELECT sum(salary) as total_salary from persons
+SELECT sum(salary) as total from persons
+SELECT avg(salary) as average from persons
+SELECT max(salary) as average from persons
+SELECT min(salary) as average from persons
+
+
+SELECT * from persons ORDER by salary
+SELECT * from persons ORDER by  salary asc
+SELECT * from persons ORDER by  salary desc
+
+
+CREATE table employee (
+    
+id int PRIMARY key AUTO_INCREMENT,
+    name varchar(50),
+    salary varchar(50),
+    cid int,
+    FOREIGN key(cid) REFERENCES country(id)
+
+
+
+);
+
+
+DELIMITER //
+CREATE PROCEDURE my_pro(IN number int(10))
+ BEGIN
+ SELECT * FROM person WHERE salary = number;
+ END //
+DELIMITER ;
+
+call my_pro (50000)
+
+
+CREATE TABLE customer (
+id int PRIMARY KEY AUTO_INCREMENT,
+    name varchar(50),
+    email varchar(50),
+    country_id int,
+    FOREIGN KEY(country_id) REFERENCES country(id)
+
+)
+
+
+SELECT * from customer JOIN country on customer.country_id = country.id
+SELECT * from customer LEFT join country on customer.country_id = country.id
+SELECT * from customer RIGHT  join country on customer.country_id = country.id
+SELECT * from birthday INNER join success on birthday.id = success.birthday_id
+SELECT customer.name,customer.email,country.country_name FROM customer LEFT join country on customer.country_id = country.id;
+SELECT * from customer full outer join country on customer.country_id = country.id
+SELECT * from customer full join country on customer.country_id = country.id
+
+
+SELECT *  from customer where  name LIKE  "a%"
+SELECT *  from customer where  name LIKE  "%a"
+SELECT *  from customer where  name LIKE  "%a%"
+
+
+CREATE view name as SELECT name from employee
+
+SELECT name from human
+where  salary in(10000)
+
+
+SELECT * from persons
+where country in("india","USA","UAe")
+
+
+SELECT name from customer where country_id=1,
+where  name from country where id = country_id 
+
+
+
+DELIMITER//
+CREATE PROCEDURE my_pro (in salary_check int(10))
+BEGIN
+SELECT * from employee where salary = salary_check;
+end//
+DELIMITER;
+
+ DELIMITER //
+CREATE PROCEDURE check_salary(IN number int(10))
+ BEGIN
+ SELECT * FROM persons WHERE salary = number;
+ END //
+DELIMITER ;
+
+call check_salary(50000)
+
+
+
+SELECT name, email
+FROM student
+WHERE country_id = (
+    SELECT id
+    FROM persons
+    WHERE id = 1
+);

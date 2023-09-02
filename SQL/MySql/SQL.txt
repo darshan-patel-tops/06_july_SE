@@ -1,0 +1,151 @@
+
+========= procedure START ===============
+
+DELIMITER //
+CREATE PROCEDURE insert_city(INOUT citynmae varchar(20))
+
+BEGIN
+
+INSERT INTO city(city_name) VALUES (cityname);
+
+END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE PROCEDURE GetOfficeByCountry(IN UserName VARCHAR(255))
+ BEGIN
+ SELECT * 
+ FROM newtable
+ WHERE user_name = UserName;
+ END //
+DELIMITER ;
+
+
+
+DELIMITER //
+CREATE PROCEDURE InserIntoMyTableProcedure(INOUT UserName VARCHAR(255))
+ BEGIN
+ INSERT INTO mytable(user_name) values (UserName);
+ END //
+DELIMITER ;
+
+
+CALL InserIntoMyTableProcedure('UserNameFromProcedure');
+
+
+
+DELIMITER //
+CREATE PROCEDURE newprocedure1(IN statename varchar(100))
+BEGIN
+
+INSERT INTO state(state_name) VALUES(statename);
+
+END //
+
+
+
+CREATE PROCEDURE `sadf`(IN `state` VARCHAR(200)) NOT DETERMINISTIC NO SQL SQL SECURITY DEFINER INSERT INTO state(state_name) VALUES(state)
+
+========= procedure END ===============
+
+
+========= View START ===============
+create view <viewName> as select <columnName1>,<columnName2> from <tableName>;
+
+CREATE VIEW view_users AS SELECT user_id,user_name,password FROM users
+
+ALTER VIEW newview AS SELECT uid,uname,password FROM register
+drop view ViewName
+========= View END ===============
+
+
+
+======= INDEX START ==========
+Create UNIQUE IUNDEX index_name ON table_name (column_name1, column_name2…)
+
+SHOW INDEX FROM database_name.table_name
+======= INDEX END ==========
+
+
+
+
+
+
+================= Function ==============
+
+DELIMITER //
+CREATE FUNCTION MarksFunction(makrs double) RETURNS VARCHAR(10)
+    
+BEGIN
+    DECLARE lvl varchar(10);
+ 
+    IF makrs > 20 THEN
+ 		SET lvl = 'sras';
+    ELSEIF (makrs <= 15 ) THEN
+        SET lvl = 'chale';
+    ELSEIF makrs < 10 THEN
+        SET lvl = 'bekar';
+    END IF;
+ 
+ RETURN (lvl);
+END
+
+
+
+call function 
+
+SELECT 
+    user_name, MarksFunction(10)
+FROM
+    newtable WHERE marks=10;
+
+
+
+
+================= Function END ==============
+
+
+
+
+
+
+
+
+================= tigger START ==============
+
+DELIMITER //
+CREATE TRIGGER before_employee_update 
+    BEFORE UPDATE ON employees
+    FOR EACH ROW 
+BEGIN
+    INSERT INTO employees_audit
+    SET action = 'update',
+     employeeNumber = OLD.employeeNumber,
+        lastname = OLD.lastname,
+        changedat = NOW(); 
+END//
+DELIMITER ;
+
+   
+
+INSERT INTO user_back_up SET userID - OLD.id,
+password = OLD.password,
+date_time = now();
+
+DROP TRIGGER IF EXISTS `before_employee_update`;
+CREATE DEFINER=`root`@`localhost` TRIGGER `before_employee_update` 
+BEFORE UPDATE ON `employees` 
+FOR EACH ROW 
+BEGIN 
+INSERT INTO employees_audit 
+SET action = 'update', 
+perform = 'new_value', 
+employeeNumber = OLD.employeeNumber, 
+lastname = OLD.lastname, 
+changedat = NOW(); 
+END
+
+
+
+================= tigger END ==============
