@@ -1,7 +1,7 @@
 #include "onlineBanking.h"
 using namespace std;
-vector<vector<string>, string> content;
-vector<string> row;
+//vector<vector<string>, string> content;
+//vector<string> row;
 string username;
 
 //Current Time and Date ====> Time Stamp <t_Stamp> ---------
