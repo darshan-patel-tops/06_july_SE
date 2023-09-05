@@ -1,4 +1,5 @@
 CRUD
+
 CREATE
 READ
 UPDATE
@@ -45,5 +46,23 @@ SELECT username FROM users WHERE username = "neet"
 
 TRUNCATE TABLE users
 
+
+ALTER TABLE users
+ADD salry int
+
+ALTER TABLE users
+DROP salry 
+
+
+UPDATE users SET name="admin"
+UPDATE users SET name="divyaveer" WHERE username = "divyaveer"
+UPDATE users SET name="divyaveer" WHERE user_id = 4
+UPDATE users SET name = "Admin",username="Admin",password="123456789" WHERE user_id =6
+UPDATE users SET name = "Admin",username="Admin",password="123456789",email="admin" WHERE user_id =9
+
+
+
+DELETE FROM users 
+DELETE FROM users WHERE user_id =7
 
 
