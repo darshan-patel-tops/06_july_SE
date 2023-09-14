@@ -5,7 +5,20 @@ READ
 UPDATE
 DELETE
 
-
+1. DDL : data definition language
+-CREATE
+-ALTER
+-TRUNCATE
+-DROP
+2. DML : Data Manipulation Language
+-INSERT
+-UPDATE
+-DELETE
+3. DQL : data query language
+-SELECT
+4. DCL : data transaction control language
+-COMMIT
+-ROLLBACK
 
 
 CREATE DATABASE 06_july_se
@@ -68,3 +81,14 @@ DELETE FROM users WHERE user_id =7
 
 SELECT * from users LEFT JOIN country ON  users.country_id = country.id 
 SELECT * from users RIGHT JOIN country ON  users.country_id = country.id 
+SELECT * from users JOIN country on users.country_id = country.id
+SELECT * from users INNER JOIN country on users.country_id = country.id
+SELECT * from users FULL OUTER JOIN country on users.country_id = country.id
+
+
+
+DELETE FROM users WHERE id =4;
+COMMIT
+
+DELETE FROM users WHERE id =1;
+ROLLBACK
