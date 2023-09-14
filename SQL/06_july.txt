@@ -66,3 +66,5 @@ DELETE FROM users
 DELETE FROM users WHERE user_id =7
 
 
+SELECT * from users LEFT JOIN country ON  users.country_id = country.id 
+SELECT * from users RIGHT JOIN country ON  users.country_id = country.id 
