@@ -26,7 +26,8 @@ class calc2 : public calc
 		
 		
 		//over riding
-			void add(int a,int b,int c)
+			void 
+			(int a,int b,int c)
 			{
 				cout<<"Inside child class"<<endl;
 				cout<<"Total is "<<a+b+c<<endl;
