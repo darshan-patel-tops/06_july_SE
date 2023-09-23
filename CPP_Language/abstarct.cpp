@@ -8,10 +8,12 @@ using namespace std;
 class rbi
 {
 	virtual void interest();
+
 	void smscharge()
 	{
 		cout<<"Sms Charge";
 	}
+	
 	virtual void loan();
 };
 
